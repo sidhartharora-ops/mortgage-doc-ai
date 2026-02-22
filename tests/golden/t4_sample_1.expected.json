@@ -1,0 +1,18 @@
+{
+  "documentType": "t4",
+  "fields": {
+    "box14_employment_income": "65000.00",
+    "box22_income_tax_deducted": "12500.00",
+    "box26_cpp_contributions": "3754.45",
+    "box18_ei_premiums": "1002.45",
+    "employer_name": "Acme Corporation",
+    "tax_year": "2024",
+    "employee_name": "Jane Smith",
+    "sin_last3": "789"
+  },
+  "requiresReview": false,
+  "validation": {
+    "valid": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,10 @@
+name: mortgage-document-pipeline
+version: "1.0.0"
+
+steps:
+  - agent: classification
+    version: "1.0.0"
+  - agent: extraction
+    version: "1.0.0"
+  - agent: validation
+    version: "1.0.0"

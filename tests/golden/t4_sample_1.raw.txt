@@ -1,0 +1,21 @@
+CANADA REVENUE AGENCY
+T4 STATEMENT OF REMUNERATION PAID
+
+Tax Year: 2024
+
+Employer: Acme Corporation
+Business Number: 123456789RP0001
+
+Employee: Jane Smith
+Social Insurance Number: ***-***-789
+
+Box 14 - Employment Income:                 $65,000.00
+Box 22 - Income Tax Deducted:               $12,500.00
+Box 16 - Employee's CPP Contributions:       $3,754.45
+Box 18 - Employee's EI Premiums:             $1,002.45
+Box 26 - CPP/QPP Pensionable Earnings:      $65,000.00
+Box 24 - EI Insurable Earnings:             $63,200.00
+Box 44 - Union Dues:                            $600.00
+Box 46 - Charitable Donations:                  $250.00
+
+Province of Employment: Ontario

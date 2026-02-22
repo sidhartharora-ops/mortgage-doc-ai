@@ -1,0 +1,113 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["mortgage"]
+}
+
+model Document {
+  id              String           @id @default(cuid())
+  filename        String
+  mimeType        String
+  documentType    String?          // "t4" | "noa" | "paystub" | "bank_statement" | null (unclassified)
+  rawText         String?          @db.Text
+  status          String           @default("uploaded") // "uploaded" | "processing" | "extracted" | "review" | "approved"
+  requiresReview  Boolean          @default(false)
+  uploadedAt      DateTime         @default(now())
+  processedAt     DateTime?
+  extractedFields ExtractedField[]
+  agentRuns       AgentRun[]
+  reviewActions   ReviewAction[]
+  auditLogs       AuditLog[]
+  reviewAudits    ReviewAudit[]
+
+  @@map("documents")
+  @@schema("mortgage")
+}
+
+model ExtractedField {
+  id             Int      @id @default(autoincrement())
+  documentId     String
+  document       Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  fieldName      String   // e.g. "box14_employment_income", "gross_pay", "total_income"
+  value          String
+  confidence     Float    // 0.0 - 1.0
+  source         String   // which agent extracted it
+  requiresReview Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@unique([documentId, fieldName])
+  @@map("extracted_fields")
+  @@schema("mortgage")
+}
+
+model AgentRun {
+  id               Int      @id @default(autoincrement())
+  documentId       String
+  document         Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  agentName        String
+  version          String
+  status           String   // "success" | "failure"
+  confidenceOverall Float
+  output           String   @db.Text // JSON stringified
+  inputHash        String
+  outputHash       String
+  modelUsed        String
+  latencyMs        Int
+  pipelineVersion  String
+  executedAt       DateTime @default(now())
+
+  @@map("agent_runs")
+  @@schema("mortgage")
+}
+
+model ReviewAction {
+  id          Int      @id @default(autoincrement())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  fieldName   String
+  action      String   // "approve" | "override" | "reject"
+  oldValue    String?
+  newValue    String?
+  reviewer    String
+  reviewedAt  DateTime @default(now())
+
+  @@map("review_actions")
+  @@schema("mortgage")
+}
+
+// Append-only audit log for agent executions
+model AuditLog {
+  id              Int      @id @default(autoincrement())
+  documentId      String
+  document        Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  agentName       String
+  version         String
+  inputHash       String
+  outputHash      String
+  confidence      Float
+  pipelineVersion String
+  timestamp       DateTime @default(now())
+
+  @@map("audit_logs")
+  @@schema("mortgage")
+}
+
+// Append-only audit log for human review actions
+model ReviewAudit {
+  id            Int      @id @default(autoincrement())
+  documentId    String
+  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  fieldName     String
+  originalValue String
+  updatedValue  String
+  reviewer      String
+  timestamp     DateTime @default(now())
+
+  @@map("review_audits")
+  @@schema("mortgage")
+}

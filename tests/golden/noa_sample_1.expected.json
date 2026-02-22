@@ -1,0 +1,16 @@
+{
+  "documentType": "noa",
+  "fields": {
+    "total_income": "72000.00",
+    "net_income": "58500.00",
+    "taxable_income": "56800.00",
+    "total_tax_payable": "13200.00",
+    "tax_year": "2024",
+    "taxpayer_name": "Jane Smith"
+  },
+  "requiresReview": false,
+  "validation": {
+    "valid": true,
+    "issues": []
+  }
+}

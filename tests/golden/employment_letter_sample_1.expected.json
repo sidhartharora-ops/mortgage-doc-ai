@@ -1,0 +1,20 @@
+{
+  "documentType": "employment_letter",
+  "fields": {
+    "employee_name": "John Alexander Smith",
+    "employer_name": "Maple Financial Corp.",
+    "job_title": "Senior Software Engineer",
+    "department": "Information Technology",
+    "employment_type": "Full-Time, Permanent",
+    "start_date": "2020-06-15",
+    "annual_salary": "98500.00",
+    "annual_bonus": "7500.00",
+    "total_compensation": "106000.00",
+    "work_location": "Toronto, Ontario"
+  },
+  "requiresReview": false,
+  "validation": {
+    "valid": true,
+    "issues": []
+  }
+}
