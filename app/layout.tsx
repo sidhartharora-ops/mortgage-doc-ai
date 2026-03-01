@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="/upload" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 14 }}>Upload</a>
           <a href="/review" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 14 }}>Review Queue</a>
           <a href="/about" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 14 }}>About</a>
+          <a href="/details" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 14 }}>More Details</a>
         </nav>
         <div style={{ backgroundColor: "#fef3c7", borderBottom: "1px solid #f59e0b", padding: "8px 24px", textAlign: "center", fontSize: 13, color: "#92400e" }}>
           This is a test application. Do not upload real personal or financial documents.
